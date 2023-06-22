@@ -29,6 +29,15 @@ type CompletionResponse = {
 
 // We define the model to use
 const model: string = 'gpt-3.5-turbo'
+// Lets create an array to hold messages
+const messages: Message[] = [];
+// Lets create default system message
+const systemMessage: Message =  { role: 'system', content: 'You are a helpful assistant.' }
+
+export const getServerSideProps: GetServerSideProps<{
+  repo: CompletionResponse
+}> = async (context) => {
+}
 
 export default function Home() {
   return (
