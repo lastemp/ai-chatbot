@@ -11,7 +11,7 @@ Please find below steps;
 
 1.
 Go to folder pages, open "index.tsx" and search for this line of code "const apiAccessKey = 'Bearer OPENAI_API_KEY'". 
-Replace OPENAI_API_KEY with your key to proceed with your testing.
+Replace OPENAI_API_KEY with your key to proceed with testing.
 
 2.
 Run the development server
@@ -25,5 +25,5 @@ On your browser, load the url http://localhost:3000/
 
 NB
 The chat responses are visible on the frontend but to better view results, please check on your terminal for logs.
-Due to time constraints, the frontend was not fully completed.
+Due to time constraints, the frontend was not fully completed although the backend is fully functional.
 
