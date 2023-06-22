@@ -25,5 +25,6 @@ On your browser, load the url http://localhost:3000/
 
 NB
 The chat responses are visible on the frontend but to better view results, please check on your terminal for logs.
-Due to time constraints, the frontend was not fully completed although the backend is fully functional.
+Due to time constraints, the UI was not fully completed although the backend code that integrates with GPT OpenAI API is fully functional.
+Based on tests, there is exchange of data with GPT OpenAI API and the same data is shown on the user interface of the web application.
 
