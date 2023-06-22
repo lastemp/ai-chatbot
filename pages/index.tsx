@@ -37,6 +37,37 @@ const systemMessage: Message =  { role: 'system', content: 'You are a helpful as
 export const getServerSideProps: GetServerSideProps<{
   repo: CompletionResponse
 }> = async (context) => {
+
+let userInput: string = ''
+  
+  // Lets get user input from the url
+  const { query } = context
+  const { message } = query
+ 
+  // For "message" array we get first element
+  userInput = Array.isArray(message) ? message[0] : message
+
+  // If "messages" array has no element, we assume the user started a new chat
+  if (messages.length == 0){
+    userInput = 'Hello!'
+  }
+  
+  // Lets create userMessage based on new input
+  const userMessage: Message =  { role: 'user', content: userInput }
+
+  // If "messages" array has no element, we assume the user started a new chat
+  // In that case, we also send the system message
+  if (messages.length == 0){
+    messages.push(systemMessage)
+    messages.push(userMessage)
+  }
+  else {
+    messages.push(userMessage)
+  }
+
+  // Lets log the messages
+  console.log(messages)
+
 }
 
 export default function Home() {
