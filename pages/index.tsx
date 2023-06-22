@@ -1,6 +1,24 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import fetch, { Headers } from 'node-fetch'
 
+// Response params
+type Message = {
+  role: string
+  content: string
+}
+
+type Choice = {
+  index: number
+  message: Message
+  finish_reason: string
+}
+
+type Usage = {
+  prompt_tokens: number
+  completion_tokens: number
+  total_tokens: number
+}
+
 export default function Home() {
   return (
     <form>
