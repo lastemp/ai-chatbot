@@ -19,6 +19,17 @@ type Usage = {
   total_tokens: number
 }
 
+type CompletionResponse = {
+  id: string
+  object: string
+  created: number
+  choices: Choice[]
+  usage: Usage
+}
+
+// We define the model to use
+const model: string = 'gpt-3.5-turbo'
+
 export default function Home() {
   return (
     <form>
