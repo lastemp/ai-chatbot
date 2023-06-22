@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps<{
   repo: CompletionResponse
 }> = async (context) => {
 
-let userInput: string = ''
+  let userInput: string = ''
   
   // Lets get user input from the url
   const { query } = context
@@ -67,7 +67,7 @@ let userInput: string = ''
 
   // Lets log the messages
   console.log(messages)
-  
+
   // Lets convert our custome type to json
   const body = JSON.stringify({
     model: model,
@@ -102,18 +102,20 @@ let userInput: string = ''
   console.log(repo.choices !== undefined? repo.choices[0].message.content : 'Error occured on accessing GPT Open API')
 
   return { props: { repo } }
-
 }
 
-export default function Home() {
+export default function Home({
+  repo,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  // The GPT Open API will be executed through getServerSideProps
+  // The api response will be assigned to input text "response" for the user to view
   return (
     <form>
       <p><label htmlFor="message">Message</label></p>
-      <p><input type="text" id="message" name="message" required /></p>
+      <p><input type="text" id="message" name="message" maxLength={500} required /></p>
       <p><label htmlFor="response">Response</label></p>
-      <p><input type="text" id="response" name="response" readOnly={true} /></p>
+      <p><input type="text" id="response" name="response" readOnly={true} defaultValue={repo.choices !== undefined? repo.choices[0].message.content : 'Error occured on accessing GPT Open API'} /></p>
       <p><button type="submit">click to submit chat</button></p>
   </form>
   )
 }
-
