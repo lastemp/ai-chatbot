@@ -67,6 +67,41 @@ let userInput: string = ''
 
   // Lets log the messages
   console.log(messages)
+  
+  // Lets convert our custome type to json
+  const body = JSON.stringify({
+    model: model,
+    messages: messages,
+  });
+
+  const headers = new Headers();
+  // GPT Open API url
+  const apiUrl = 'https://api.openai.com/v1/chat/completions'
+  // AccessKey for accessing GPT Open API
+  const apiAccessKey = 'Bearer OPENAI_API_KEY'
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', apiAccessKey);
+  const res = await fetch(apiUrl, {
+    method: 'POST',
+    headers,
+    body,
+  })
+  .then((response) => {
+    if (!response.ok) { // lets log an error where the request failed
+      console.error('An error occurred while fetching data!')
+    }
+    
+    return response
+  })
+  .catch((error) => { // lets log an error for any other errors that occured
+    console.error('Error:', error.message)
+  })
+
+  const repo = await res.json()
+  // Lets log the json response
+  console.log(repo.choices !== undefined? repo.choices[0].message.content : 'Error occured on accessing GPT Open API')
+
+  return { props: { repo } }
 
 }
 
